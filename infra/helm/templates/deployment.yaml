@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "spring-debug-app.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "spring-debug-app.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "spring-debug-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "spring-debug-app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            requests:
+              memory: {{ .Values.resources.memoryRequest }}
+              cpu: {{ .Values.resources.cpuRequest }}
+            limits:
+              memory: {{ .Values.resources.memoryLimit }}
+              cpu: {{ .Values.resources.cpuLimit }}
+          livenessProbe:
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
+            httpGet:
+              port: {{ .Values.ports.management.value }}
+              path: {{ .Values.probes.liveness.path }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+            successThreshold: {{ .Values.probes.liveness.successThreshold }}
+            timeoutSeconds: {{ .Values.probes.liveness.timeoutSeconds }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
+          readinessProbe:
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
+            httpGet:
+              port: {{ .Values.ports.management.value }}
+              path: {{ .Values.probes.readiness.path }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+            successThreshold: {{ .Values.probes.readiness.successThreshold }}
+            timeoutSeconds: {{ .Values.probes.readiness.timeoutSeconds }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
+          ports:
+          - containerPort: {{ .Values.ports.http.value }}
+            name: {{ .Values.ports.http.name }}
+          - containerPort: {{ .Values.ports.management.value }}
+            name: {{ .Values.ports.management.name }}
+          {{- if .Values.envs }}
+          env:
+          {{- range .Values.envs }}
+          - name: {{ .name }}
+            value: {{ .value }}
+          {{- end }}
+          {{- end }}

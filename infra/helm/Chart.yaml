@@ -1,0 +1,6 @@
+apiVersion: v2
+name: spring-debug-app
+description: Spring Boot application for debugging purpose
+type: application
+version: "1.0"
+appVersion: "1.0"

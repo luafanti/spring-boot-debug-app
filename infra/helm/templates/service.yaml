@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "spring-debug-app.fullname" . }}
+  labels:
+    {{- include "spring-debug-app.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "spring-debug-app.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: {{ .Values.ports.http.name }}
+      port: {{ .Values.ports.http.value }}
+      protocol: TCP
+    - name: {{ .Values.ports.management.name }}
+      port: {{ .Values.ports.management.value }}
+      protocol: TCP
