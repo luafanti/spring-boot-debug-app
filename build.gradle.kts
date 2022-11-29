@@ -38,3 +38,17 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.register("bootJarPath") {
+    doLast {
+        println(
+            String.format(
+                "%s/%s/%s-%s.jar",
+                project.property("buildDir"),
+                project.property("libsDirName"),
+                project.property("name"),
+                project.property("version")
+            )
+        )
+    }
+}
