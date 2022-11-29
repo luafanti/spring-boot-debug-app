@@ -7,7 +7,7 @@ RUN infra/docker/build.sh
 FROM adoptopenjdk/openjdk11:jre-11.0.10_9 AS runtime
 COPY --from=builder /app/app.jar /app/app.jar
 WORKDIR /app
-EXPOSE 8088
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
 

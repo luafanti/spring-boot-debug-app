@@ -1,2 +1,15 @@
 server:
-  port: 8088
+  port: 8080
+
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics"
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
