@@ -49,10 +49,12 @@ spec:
             name: {{ .Values.ports.http.name }}
           - containerPort: {{ .Values.ports.management.value }}
             name: {{ .Values.ports.management.name }}
-          {{- if .Values.envs }}
           env:
+          - name: LOG_LEVEL_SERVICE
+            value: {{ .Values.log.level.service | quote }}
+          - name: LOG_LEVEL_SPRING
+            value: {{ .Values.log.level.spring | quote }}
           {{- range .Values.envs }}
           - name: {{ .name }}
             value: {{ .value }}
-          {{- end }}
           {{- end }}

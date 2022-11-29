@@ -13,3 +13,10 @@ management:
       show-details: always
       probes:
         enabled: true
+
+logging:
+  level:
+    org:
+      springframework: ${LOG_LEVEL_SPRING:error}
+    com:
+      luafanti: ${LOG_LEVEL_SERVICE:warn}
