@@ -14,13 +14,13 @@ class LoggingController {
     @GetMapping("/info")
     fun info(): String {
         logger.info("Info log printing")
-        return "OK"
+        return "Info log produced"
     }
 
     @GetMapping("/debug")
     fun debug(): String {
         logger.info("Debug log printing")
-        return "OK"
+        return "Debug log produced"
     }
 
     @GetMapping("/exception")
@@ -30,6 +30,6 @@ class LoggingController {
         } catch (e: Exception) {
             logger.error(e.stackTraceToString())
         }
-        return "OK"
+        return "Exception stack strace produced"
     }
 }
