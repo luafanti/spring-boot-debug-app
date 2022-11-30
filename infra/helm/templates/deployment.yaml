@@ -15,6 +15,7 @@ spec:
       labels:
         {{- include "spring-debug-app.selectorLabels" . | nindent 8 }}
     spec:
+      serviceAccountName: {{ include "spring-debug-app.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

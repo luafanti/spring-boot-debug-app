@@ -13,6 +13,8 @@ spec:
     targetRevision: main
     helm:
       values: |-
+        serviceAccount:
+          create: true
         image:
           repository: luafanti/spring-boot-debug-app
           tag: main
