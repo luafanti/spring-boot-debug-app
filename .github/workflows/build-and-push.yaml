@@ -287,3 +287,4 @@ jobs:
         run: |
           docker tag $BUILD_IMAGE_NAME:$BUILD_IMAGE_TAG $PUSH_REGISTRY/$PUSH_IMAGE_NAME:$PUSH_IMAGE_TAG
           docker push $PUSH_REGISTRY/$PUSH_IMAGE_NAME:$PUSH_IMAGE_TAG
+

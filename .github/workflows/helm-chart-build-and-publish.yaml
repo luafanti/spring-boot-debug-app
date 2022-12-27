@@ -1,0 +1,44 @@
+name: Build and publish Helm Chart
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+    tags:
+       - '*'
+    paths:
+      - infra/helm
+
+jobs:
+  push-to-cloud-smith:
+    name: Push Helm Chart to Cloudsmith
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ${{ github.event.repository.name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: azure/setup-helm@v3
+        with:
+          version: '3.10.3'
+
+      - name: Build Helm package
+        run: |
+          helm package -u infra/helm
+
+      - name: Push Helm Chart to Cloudsmith
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: cloudsmith-io/action@master
+        with:
+          api-key: ${{ secrets.CLOUDSMITH_API_KEY }}
+          command: "push"
+          format: "helm"
+          owner: "luafanti"
+          repo: "app"
+          republish: "true"
+          file: "spring-debug-app-1.0.tgz"
