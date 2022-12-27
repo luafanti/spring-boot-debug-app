@@ -41,4 +41,4 @@ jobs:
           owner: "luafanti"
           repo: "app"
           republish: "true"
-          file: "spring-debug-app-1.0.tgz"
+          file: "spring-debug-app-1.0.0.tgz"
