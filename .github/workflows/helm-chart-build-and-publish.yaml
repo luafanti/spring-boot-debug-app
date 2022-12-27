@@ -9,7 +9,7 @@ on:
     tags:
        - '*'
     paths:
-      - infra/helm
+      - 'infra/helm/**'
 
 jobs:
   push-to-cloud-smith:
