@@ -7,8 +7,6 @@ on:
       - 'develop'
     tags:
        - '*'
-    paths:
-      - '!infra/helm/**'
 
 jobs:
   build:
