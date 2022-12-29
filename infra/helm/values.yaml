@@ -9,8 +9,8 @@ image:
 replicaCount: 1
 
 resources:
-  memoryRequest: 256Mi
-  memoryLimit: 512Mi
+  memoryRequest: 512Mi
+  memoryLimit: 1Gi
   cpuRequest: 500m
   cpuLimit: 1
 
