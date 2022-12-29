@@ -46,3 +46,7 @@ log:
   level:
     spring: "info"
     service: "info"
+
+monitoring:
+  prometheus:
+    enabled: false

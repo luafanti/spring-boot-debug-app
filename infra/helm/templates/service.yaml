@@ -4,6 +4,9 @@ metadata:
   name: {{ include "spring-debug-app.fullname" . }}
   labels:
     {{- include "spring-debug-app.labels" . | nindent 4 }}
+    {{- if .Values.monitoring.prometheus.enabled }}
+    prometheus-monitoring: "true"
+    {{- end }}
 spec:
   type: ClusterIP
   selector:
