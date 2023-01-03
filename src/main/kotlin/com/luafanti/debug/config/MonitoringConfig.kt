@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration
 
 
 @Configuration
-class MetricConfig {
+class MonitoringConfig {
 
     @Value("\${spring.application.name}")
     private val appName: String? = null
