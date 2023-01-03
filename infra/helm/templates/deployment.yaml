@@ -52,9 +52,13 @@ spec:
             name: {{ .Values.ports.management.name }}
           env:
           - name: LOG_LEVEL_SERVICE
-            value: {{ .Values.log.level.service | quote }}
+            value: {{ .Values.logging.level.service | quote }}
           - name: LOG_LEVEL_SPRING
-            value: {{ .Values.log.level.spring | quote }}
+            value: {{ .Values.logging.level.spring | quote }}
+          {{- if .Values.logging.json.enabled }}
+          - name: JSON_LOGS_ENABLED
+            value: "true"
+          {{- end }}
           {{- range .Values.envs }}
           - name: {{ .name }}
             value: {{ .value }}

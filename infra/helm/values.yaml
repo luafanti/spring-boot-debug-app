@@ -42,10 +42,12 @@ envs:
   - name: EXTRA_HELM_ENV
     value: EXTRA_HELM_VALUE
 
-log:
+logging:
   level:
     spring: "info"
     service: "info"
+  json:
+    enabled: false
 
 monitoring:
   prometheus:
