@@ -55,10 +55,8 @@ spec:
             value: {{ .Values.logging.level.service | quote }}
           - name: LOG_LEVEL_SPRING
             value: {{ .Values.logging.level.spring | quote }}
-          {{- if .Values.logging.json.enabled }}
           - name: JSON_LOGS_ENABLED
-            value: "true"
-          {{- end }}
+            value: {{ default "false" .Values.logging.json.enabled | quote }}
           {{- range .Values.envs }}
           - name: {{ .name }}
             value: {{ .value }}
