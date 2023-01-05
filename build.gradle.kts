@@ -25,7 +25,6 @@ dependencies {
     implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
     implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
     implementation("org.codehaus.janino:janino:3.1.9")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
